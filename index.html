@@ -12,7 +12,7 @@
 <div class="internal">Démonstration interne réservée à la direction de DotVision · Données de site fictives · Ne pas diffuser</div>
 
 <nav class="nav"><div class="wrap">
-  <a class="brand" href="#top"><span class="dot"></span>DotVision <span style="color:var(--ciel);font-weight:600">· Spoony 2.0</span></a>
+  <a class="brand" href="#top"><img src="img/logo-dotvision.png" alt="DotVision"><span class="sep">|</span><span class="prod">Spoony 2.0</span></a>
   <ul><li><a href="#messages">Messages</a></li><li><a href="#themes">Thèmes</a></li><li><a href="#secteurs">9 secteurs</a></li><li><a href="#archi">Architecture</a></li></ul>
 </div></nav>
 
@@ -22,47 +22,27 @@
     <h1>L'intelligence descend <em>dans l'armoire.</em></h1>
     <p class="lead">Spoony 2.0 mesure chaque départ électrique, repère les dérives et les micro-coupures, et rend la donnée à l'exploitant. Aucun capteur sur la machine.</p>
     <div class="ctas">
-      <a class="btn gold" href="#secteurs">Ouvrir une application</a>
+      <a class="btn gold" href="#secteurs">Voir les animations</a>
       <a class="btn ghost" href="#messages">Les messages porteurs</a>
     </div>
     <div class="stamp">
-      <div><b>15 applications</b>6 thèmes, 9 secteurs</div>
-      <div><b>Un seul boîtier</b>industrie et tertiaire</div>
+      <div><b>15 animations</b>6 thèmes, 9 secteurs</div>
+      <div><b>Un boîtier modulaire</b>base, mesure, LTE, UPS</div>
       <div><b>Rien ne sort du site</b>données à l'exploitant</div>
     </div>
   </div>
-  <div class="cabinet" aria-hidden="true">
-    <svg viewBox="0 0 460 480">
-      <defs>
-        <linearGradient id="cab" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1B3864"/><stop offset="1" stop-color="#0E2244"/></linearGradient>
-        <linearGradient id="box" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2459B8"/><stop offset="1" stop-color="#13294B"/></linearGradient>
-      </defs>
-      <rect x="40" y="20" width="250" height="440" rx="14" fill="url(#cab)" stroke="#68AEDF" stroke-opacity=".35"/>
-      <g stroke="#68AEDF" stroke-opacity=".22"><line x1="60" y1="110" x2="270" y2="110"/><line x1="60" y1="230" x2="270" y2="230"/><line x1="60" y1="350" x2="270" y2="350"/></g>
-      <g fill="#24406E"><rect x="62" y="60" width="22" height="44" rx="3"/><rect x="90" y="60" width="22" height="44" rx="3"/><rect x="118" y="60" width="22" height="44" rx="3"/><rect x="146" y="60" width="22" height="44" rx="3"/><rect x="174" y="60" width="22" height="44" rx="3"/><rect x="202" y="60" width="22" height="44" rx="3"/></g>
-      <g>
-        <rect x="70" y="150" width="190" height="62" rx="8" fill="url(#box)" stroke="#68AEDF" stroke-opacity=".6"/>
-        <text x="84" y="174" fill="#fff" font-family="Inter,system-ui" font-weight="800" font-size="14">SPOONY 2.0</text>
-        <text x="84" y="194" fill="#68AEDF" font-family="Inter,system-ui" font-size="10.5">BASE · MESURE · LTE · UPS</text>
-        <circle class="pulse" cx="244" cy="166" r="4" fill="#3CCB8C"/>
-        <circle class="pulse" cx="244" cy="182" r="4" fill="#F2B632" style="animation-delay:.8s"/>
-      </g>
-      <g stroke="#F2B632" stroke-width="2" fill="none" opacity=".9">
-        <path class="flow" d="M73 104 V 140 Q 73 148 82 150"/>
-        <path class="flow" d="M129 104 V 150"/>
-        <path class="flow" d="M185 104 V 150"/>
-      </g>
-      <g fill="#24406E"><rect x="62" y="260" width="200" height="70" rx="6"/><rect x="62" y="380" width="200" height="56" rx="6"/></g>
-      <g stroke="#68AEDF" stroke-width="2" fill="none"><path class="flow" d="M260 181 H 330 V 110 H 380" style="animation-duration:1.8s"/><path class="flow" d="M260 196 H 350 V 300 H 380" style="animation-duration:2.2s"/></g>
-      <rect x="380" y="78" width="70" height="64" rx="10" fill="#0E2244" stroke="#68AEDF" stroke-opacity=".5"/>
-      <text x="415" y="105" text-anchor="middle" fill="#fff" font-family="Inter,system-ui" font-size="11" font-weight="700">EMS</text>
-      <text x="415" y="122" text-anchor="middle" fill="#68AEDF" font-family="Inter,system-ui" font-size="9.5">SCADA · MES</text>
-      <rect x="380" y="268" width="70" height="64" rx="10" fill="#0E2244" stroke="#F2B632" stroke-opacity=".6"/>
-      <text x="415" y="295" text-anchor="middle" fill="#fff" font-family="Inter,system-ui" font-size="11" font-weight="700">Alerte</text>
-      <text x="415" y="312" text-anchor="middle" fill="#F2B632" font-family="Inter,system-ui" font-size="9.5">dérive +7 %</text>
-    </svg>
+  <div class="hero-visual">
+    <video id="hero-video" autoplay muted loop playsinline poster="img/spoony-2.jpg" style="display:none"><source src="img/hero.mp4" type="video/mp4"></video>
+    <img id="hero-img" src="img/spoony-2.jpg" alt="Boîtier Spoony 2.0 et ses modules">
+    <div class="chip c1"><i></i>Départ broyeur BK2<b>2,71 MW · mesuré</b></div>
+    <div class="chip c2">Agent Spoony<b>Dérive +5,8 %</b></div>
   </div>
 </div></header>
+
+<div class="gallery" aria-hidden="true"><div class="strip">
+  <img src="img/secteur-03.jpg" alt=""><img src="img/theme-industrie.jpg" alt=""><img src="img/secteur-06.jpg" alt=""><img src="img/secteur-08.jpg" alt=""><img src="img/theme-batiment.jpg" alt=""><img src="img/secteur-02.jpg" alt=""><img src="img/secteur-09.jpg" alt=""><img src="img/secteur-05.jpg" alt="">
+  <img src="img/secteur-03.jpg" alt=""><img src="img/theme-industrie.jpg" alt=""><img src="img/secteur-06.jpg" alt=""><img src="img/secteur-08.jpg" alt=""><img src="img/theme-batiment.jpg" alt=""><img src="img/secteur-02.jpg" alt=""><img src="img/secteur-09.jpg" alt=""><img src="img/secteur-05.jpg" alt="">
+</div></div>
 
 <section class="messages" id="messages"><div class="wrap">
   <div class="sec-head">
@@ -95,7 +75,7 @@
   <div class="sec-head">
     <span class="eyebrow">Kiosque 1 · Thèmes couverts</span>
     <h2>Une même mesure, de l'usine à la gare.</h2>
-    <p>Choisissez un thème : l'application Spoony 2.0 s'ouvre sur un site type, avec ses départs, ses alertes et ses indicateurs.</p>
+    <p>Chaque thème ouvre son animation : l'application Spoony 2.0 sur un site type, avec ses départs, ses alertes et ses indicateurs.</p>
   </div>
   <div class="grid t6" id="k-themes"></div>
 </div></section>
@@ -104,7 +84,7 @@
   <div class="sec-head">
     <span class="eyebrow">Kiosque 2 · 9 cas d'usage industriels</span>
     <h2>Là où le capteur sur machine atteint ses limites.</h2>
-    <p>Poussière, chaleur, lavage haute pression, pompes immergées : la mesure reste dans l'armoire. Chaque fiche ouvre son application.</p>
+    <p>Poussière, chaleur, lavage haute pression, pompes immergées : la mesure reste dans l'armoire. Chaque fiche ouvre son animation et sa plaquette.</p>
   </div>
   <div class="grid t9" id="k-secteurs"></div>
 </div></section>
@@ -133,7 +113,7 @@
 <!-- =================== APPLICATION =================== -->
 <div class="app" id="app" role="dialog" aria-modal="true">
   <div class="app-top">
-    <span class="brand"><span class="dot"></span><span>Spoony 2.0</span></span>
+    <span class="brand"><img src="img/logo-dotvision.png" alt="DotVision"><span>Spoony 2.0</span></span>
     <div class="site"><b id="app-site">Site</b><span id="app-place"></span></div>
     <span class="live"><i></i>EN DIRECT</span>
     <span class="fict">Données fictives</span>
@@ -256,5 +236,9 @@
 
 <script src="data.js"></script>
 <script src="app.js"></script>
+<script>
+(function(){var v=document.getElementById("hero-video"),i=document.getElementById("hero-img");
+v.addEventListener("canplay",function(){v.style.display="block";i.style.display="none";});})();
+</script>
 </body>
 </html>

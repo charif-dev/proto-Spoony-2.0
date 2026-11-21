@@ -218,3 +218,56 @@ footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   .fict{font-size:10px;padding:4px 7px}
   .chartbox canvas{height:220px}
 }
+
+/* ======== V2 : identité plus riche ======== */
+.nav{background:rgba(255,255,255,.94);border-bottom:1px solid #E3EAF4}
+.nav .brand{color:var(--marine)}
+.nav .brand img{height:26px;display:block}
+.nav .brand .sep{color:#9FB0C8;font-weight:400}
+.nav .brand .prod{color:var(--cobalt);font-weight:700;font-size:16px}
+.nav ul a{color:#33476A}.nav ul a:hover{color:var(--cobalt)}
+.hero{background:radial-gradient(900px 500px at 85% 10%,#DCEBFA 0%,transparent 65%),linear-gradient(180deg,#FFFFFF 0%,#EEF5FC 100%);color:var(--marine)}
+.hero .eyebrow{color:var(--cobalt)}
+.hero h1 em{color:var(--cobalt)}
+.hero p.lead{color:#3A4C68}
+.hero .btn.ghost{background:#fff;color:var(--marine);border:1px solid #CFDCEC}
+.hero .stamp{color:#5B6B82}.hero .stamp b{color:var(--marine)}
+.hero-visual{position:relative;border-radius:22px;overflow:hidden;box-shadow:0 40px 80px -40px rgba(19,41,75,.55);background:#fff}
+.hero-visual img,.hero-visual video{display:block;width:100%;height:auto}
+.hero-visual .chip{position:absolute;background:rgba(255,255,255,.94);backdrop-filter:blur(6px);border:1px solid #DCE6F2;border-radius:12px;padding:9px 12px;font-size:12.5px;color:var(--marine);box-shadow:0 10px 30px -12px rgba(19,41,75,.4);animation:float 5s ease-in-out infinite}
+.hero-visual .chip b{display:block;font-size:15px}
+.hero-visual .chip.c1{left:14px;bottom:16px}
+.hero-visual .chip.c2{right:14px;top:14px;animation-delay:1.2s}
+.hero-visual .chip.c2 b{color:#C2410C}
+.hero-visual .chip i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-right:6px;animation:ping 1.6s infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero-logo{height:34px;margin-bottom:18px;display:block}
+
+.gallery{background:var(--marine);color:#fff;padding:0;overflow:hidden}
+.gallery .strip{display:flex;gap:0;animation:scroll 60s linear infinite;width:max-content}
+.gallery .strip img{height:190px;width:auto;display:block;opacity:.92}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+.kiosk.dark{background:linear-gradient(180deg,#EAF1FA,#F5F8FC);color:var(--texte)}
+.kiosk.dark .sec-head h2{color:var(--marine)}.kiosk.dark .sec-head p{color:#4A5568}.kiosk.dark .sec-head .eyebrow{color:var(--cobalt)}
+.fiche{background:#fff;border-radius:16px;padding:18px 18px 16px;border:1px solid #DFE7F2;box-shadow:0 18px 40px -30px rgba(19,41,75,.5);display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+.fiche:hover{transform:translateY(-4px);box-shadow:0 30px 60px -30px rgba(19,41,75,.55)}
+.f-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.f-logo{height:20px}
+.f-ref{text-align:right}
+.f-ref b{display:block;font-size:10.5px;letter-spacing:.18em;color:var(--cobalt)}
+.f-ref span{font-size:10px;color:#6B7A90}
+.f-band{margin:10px 0 12px;background:#EEF3F9;border-left:3px solid var(--cobalt);padding:5px 9px;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#41546F}
+.fiche h3{font-size:21px;color:var(--marine);line-height:1.15;letter-spacing:-.01em}
+.f-tag{color:#2E7BC8;font-size:14px;margin:5px 0 12px;min-height:42px}
+.f-img{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:16/9;background:#E8EEF6;cursor:pointer}
+.f-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.fiche:hover .f-img img{transform:scale(1.05)}
+.f-play{position:absolute;inset:auto auto 10px 10px;width:38px;height:38px;border-radius:50%;background:rgba(242,182,50,.95);color:var(--marine);display:grid;place-items:center;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.3)}
+.f-fact{font-size:12.5px;color:#5B6B82;margin:12px 0 14px;flex:1}
+.f-links{display:flex;gap:8px}
+.lk{flex:1;text-align:center;font:inherit;font-size:13.5px;font-weight:700;border-radius:9px;padding:10px 8px;cursor:pointer;text-decoration:none;border:1px solid transparent}
+.lk.gold{background:var(--or);color:var(--marine)}
+.lk.ghost{background:#fff;border-color:#C9D7EA;color:var(--cobalt)}
+.lk:hover{filter:brightness(.97)}
+.app-top .brand img{height:22px;background:#fff;border-radius:6px;padding:3px 6px}

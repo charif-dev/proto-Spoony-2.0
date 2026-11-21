@@ -2,7 +2,7 @@
 window.SCENARIOS = [
   /* ---------- KIOSQUE 1 : THÈMES ---------- */
   {
-    id: "industrie", kiosk: "theme", icon: "factory",
+    id: "industrie", kiosk: "theme", img: "img/theme-industrie.jpg", icon: "factory",
     title: "Industrie",
     tagline: "Moteurs, compresseurs, machines-outils, robots et convoyeurs suivis départ par départ.",
     vector: "OBL ISO 50001",
@@ -23,7 +23,7 @@ window.SCENARIOS = [
     entry: "Instrumenter la centrale d'air et les trois machines les plus chargées."
   },
   {
-    id: "batiment", kiosk: "theme", icon: "building",
+    id: "batiment", kiosk: "theme", img: "img/theme-batiment.jpg", icon: "building",
     title: "Bâtiments tertiaires",
     tagline: "Commerces, bureaux, universités : la mesure par usage que le décret tertiaire attend.",
     vector: "OBL décret tertiaire",
@@ -44,7 +44,7 @@ window.SCENARIOS = [
     entry: "Instrumenter le TGBT et les départs CVC, éclairage et ascenseurs."
   },
   {
-    id: "mobilite", kiosk: "theme", icon: "escalator",
+    id: "mobilite", kiosk: "theme", img: "img/theme-mobilite.jpg", icon: "escalator",
     title: "Transport et mobilité verticale",
     tagline: "Escalators, ascenseurs et portes d'un parc multimarque réunis dans une même donnée.",
     vector: "ROI maintenance",
@@ -65,7 +65,7 @@ window.SCENARIOS = [
     entry: "Instrumenter un panel multimarque d'escalators, d'ascenseurs et de portes."
   },
   {
-    id: "photovoltaique", kiosk: "theme", icon: "solar",
+    id: "photovoltaique", kiosk: "theme", img: "img/theme-photovoltaique.jpg", icon: "solar",
     title: "Production photovoltaïque",
     tagline: "Chaque onduleur mesuré, la production rapprochée de la consommation du site.",
     vector: "NOT RSE",
@@ -86,7 +86,7 @@ window.SCENARIOS = [
     entry: "Instrumenter chaque onduleur et le départ principal du site."
   },
   {
-    id: "bornes", kiosk: "theme", icon: "charger",
+    id: "bornes", kiosk: "theme", img: "img/theme-bornes.jpg", icon: "charger",
     title: "Bornes de recharge",
     tagline: "Mesure par borne, délestage selon la puissance souscrite, protocole OCPP.",
     vector: "ROI puissance souscrite",
@@ -107,7 +107,7 @@ window.SCENARIOS = [
     entry: "Instrumenter les groupes de bornes et le départ général du parking."
   },
   {
-    id: "maintenance", kiosk: "theme", icon: "gear",
+    id: "maintenance", kiosk: "theme", img: "img/theme-maintenance.jpg", icon: "gear",
     title: "Process, automatisme et maintenance",
     tagline: "La signature électrique de chaque départ sert d'indicateur de santé des machines.",
     vector: "ROI disponibilité",
@@ -130,7 +130,7 @@ window.SCENARIOS = [
 
   /* ---------- KIOSQUE 2 : 9 SECTEURS INDUSTRIELS (fiches 01 à 09) ---------- */
   {
-    id: "tri", kiosk: "secteur", num: "01", icon: "recycle",
+    id: "tri", kiosk: "secteur", num: "01", img: "img/secteur-01.jpg", pdf: "plaquettes/fiche-01-tri.pdf", icon: "recycle",
     title: "Centres de tri et recyclage",
     tagline: "Un moteur indisponible sur une ligne de tri arrête le tronçon complet.",
     fact: "164 centres de tri en France métropolitaine, selon Citeo cité par Natura Sciences en 2023.",
@@ -152,7 +152,7 @@ window.SCENARIOS = [
     entry: "Instrumenter un tronçon de ligne."
   },
   {
-    id: "carrieres", kiosk: "secteur", num: "02", icon: "mountain",
+    id: "carrieres", kiosk: "secteur", num: "02", img: "img/secteur-02.jpg", pdf: "plaquettes/fiche-02-carrieres.pdf", icon: "mountain",
     title: "Carrières et granulats",
     tagline: "Sur un concasseur, la vibration est le procédé lui-même.",
     fact: "2 995 carrières en activité en 2023, selon le SDES.",
@@ -174,7 +174,7 @@ window.SCENARIOS = [
     entry: "Instrumenter le concassage primaire et un convoyeur critique."
   },
   {
-    id: "ciment", kiosk: "secteur", num: "03", icon: "kiln",
+    id: "ciment", kiosk: "secteur", num: "03", img: "img/secteur-03.jpg", pdf: "plaquettes/fiche-03-ciment.pdf", icon: "kiln",
     title: "Cimenteries",
     tagline: "Un audit ISO 50001 ne se satisfait plus d'une répartition énergétique au prorata.",
     fact: "29 cimenteries en France, selon le SFIC cité par MineralInfo en 2025.",
@@ -196,7 +196,7 @@ window.SCENARIOS = [
     entry: "Instrumenter un broyeur et ses auxiliaires critiques."
   },
   {
-    id: "papier", kiosk: "secteur", num: "04", icon: "paper",
+    id: "papier", kiosk: "secteur", num: "04", img: "img/secteur-04.jpg", pdf: "plaquettes/fiche-04-papier.pdf", icon: "paper",
     title: "Papeteries et cartonneries",
     tagline: "L'ambiance chaude et humide d'une machine à papier use l'instrumentation de surface.",
     fact: "73 usines papetières recensées par la Copacel.",
@@ -218,7 +218,7 @@ window.SCENARIOS = [
     entry: "Instrumenter une section de machine et ses utilités."
   },
   {
-    id: "siderurgie", kiosk: "secteur", num: "05", icon: "steel",
+    id: "siderurgie", kiosk: "secteur", num: "05", img: "img/secteur-05.jpg", pdf: "plaquettes/fiche-05-siderurgie.pdf", icon: "steel",
     title: "Sidérurgie et laminage",
     tagline: "Sur un laminoir, le moteur reste inaccessible en exploitation pour raison de température.",
     fact: "Peu de sites, des dizaines de points de mesure par site équipé.",
@@ -240,7 +240,7 @@ window.SCENARIOS = [
     entry: "Instrumenter un four ou une ligne et ses auxiliaires critiques."
   },
   {
-    id: "eau", kiosk: "secteur", num: "06", icon: "water",
+    id: "eau", kiosk: "secteur", num: "06", img: "img/secteur-06.jpg", pdf: "plaquettes/fiche-06-eau.pdf", icon: "water",
     title: "Eau et assainissement",
     tagline: "Une pompe immergée ne recevra jamais de capteur vibratoire.",
     fact: "4 048 stations de 2 000 équivalents-habitants et plus en 2024, selon le portail assainissement du ministère.",
@@ -262,7 +262,7 @@ window.SCENARIOS = [
     entry: "Instrumenter le relevage et l'aération d'une station."
   },
   {
-    id: "agro", kiosk: "secteur", num: "07", icon: "food",
+    id: "agro", kiosk: "secteur", num: "07", img: "img/secteur-07.jpg", pdf: "plaquettes/fiche-07-agro.pdf", icon: "food",
     title: "Agroalimentaire de procédé continu",
     tagline: "Le lavage haute pression interdit toute instrumentation posée sur la machine.",
     fact: "Sucreries, laiteries, amidonneries : l'arrêt est interdit en campagne.",
@@ -284,7 +284,7 @@ window.SCENARIOS = [
     entry: "Instrumenter une ligne et ses utilités sur une campagne complète."
   },
   {
-    id: "rail", kiosk: "secteur", num: "08", icon: "train",
+    id: "rail", kiosk: "secteur", num: "08", img: "img/secteur-08.jpg", pdf: "plaquettes/fiche-08-rail.pdf", icon: "train",
     title: "Infrastructure ferroviaire et mobilité verticale",
     tagline: "Une donnée énergétique commune pour piloter un parc multimarque selon l'usage réel.",
     fact: "Déploiement en cours dans une grande gare européenne, extension à l'étude.",
@@ -306,7 +306,7 @@ window.SCENARIOS = [
     entry: "Instrumenter un panel multimarque d'escalators, d'ascenseurs et de portes."
   },
   {
-    id: "verre", kiosk: "secteur", num: "09", icon: "port",
+    id: "verre", kiosk: "secteur", num: "09", img: "img/secteur-09.jpg", pdf: "plaquettes/fiche-09-verre.pdf", icon: "port",
     title: "Verreries, ports et manutention lourde",
     tagline: "Un arrêt de four non planifié endommage l'outil de production lui-même.",
     fact: "Chaleur, vibrations, exposition saline : la mesure reste dans l'armoire.",

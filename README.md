@@ -13,8 +13,13 @@ Toutes les données de site sont fictives. Les simulations (dérive, micro-coupu
 ## Ouvrir la démo
 Site statique sans dépendance : ouvrir `index.html` dans un navigateur, ou servir le dossier (`python3 -m http.server`).
 
+## Animation du bandeau
+Le prompt de génération est dans `PROMPT-ANIMATION.md`. La vidéo obtenue se dépose sous `img/hero.mp4`.
+
 ## Fichiers
 - `index.html` : page et coquille de l'application
 - `style.css` : charte (marine 13294B, bleu ciel 68AEDF, cobalt 2459B8, or F2B632, texte 1A1C1B)
 - `data.js` : les quinze scénarios
 - `app.js` : moteur de simulation et rendu
+- `img/` : visuels Spoony 2.0, logo DotVision, photos des fiches
+- `plaquettes/` : les neuf fiches sectorielles, mention et logo du distributeur retirés

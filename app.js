@@ -31,19 +31,21 @@
   function renderKiosks() {
     const t = $("#k-themes"), s = $("#k-secteurs");
     SCENARIOS.forEach((sc) => {
-      const b = document.createElement("button");
-      b.className = "card";
-      b.dataset.id = sc.id;
-      if (sc.kiosk === "theme") {
-        b.innerHTML = `<div class="ico">${icon(sc.icon)}</div><h3>${sc.title}</h3><p>${sc.tagline}</p>
-          <div class="go"><span class="vec">${sc.vector}</span><span>Ouvrir l'application →</span></div>`;
-        t.appendChild(b);
-      } else {
-        b.innerHTML = `<span class="num">${sc.num}</span><div class="ico">${icon(sc.icon)}</div><h3>${sc.title}</h3><p>${sc.tagline}</p>
-          <div class="fact">${sc.fact}</div><div class="go"><span class="vec">Fiche ${sc.num}</span><span>Ouvrir l'application →</span></div>`;
-        s.appendChild(b);
-      }
-      b.addEventListener("click", () => openApp(sc.id));
+      const c = document.createElement("article");
+      c.className = "fiche";
+      const isT = sc.kiosk === "theme";
+      const second = isT
+        ? `<a class="lk ghost" href="img/rollup-industrie-tertiaire.jpg" target="_blank" rel="noopener">Kakémono</a>`
+        : `<a class="lk ghost" href="${sc.pdf}" target="_blank" rel="noopener">Plaquette PDF</a>`;
+      c.innerHTML = `<div class="f-head"><img class="f-logo" src="img/logo-dotvision.png" alt="DotVision"><div class="f-ref"><b>${isT ? "THÈME" : "FICHE SECTEUR " + sc.num}</b><span>Spoony 2.0 par DotVision</span></div></div>
+        <div class="f-band">${isT ? sc.vector : "Sous-comptage et pilotage énergétique"}</div>
+        <h3>${sc.title}</h3><p class="f-tag">${sc.tagline}</p>
+        <div class="f-img"><img src="${sc.img}" alt="${sc.title}"><span class="f-play">▶</span></div>
+        ${sc.fact ? `<p class="f-fact">${sc.fact}</p>` : `<p class="f-fact">Point d'entrée : ${sc.entry}</p>`}
+        <div class="f-links"><button class="lk gold">Voir l'animation</button>${second}</div>`;
+      $(".lk.gold", c).addEventListener("click", () => openApp(sc.id));
+      $(".f-img", c).addEventListener("click", () => openApp(sc.id));
+      (isT ? t : s).appendChild(c);
     });
   }
 
