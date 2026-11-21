@@ -14,7 +14,7 @@ Toutes les données de site sont fictives. Les simulations (dérive, micro-coupu
 Site statique sans dépendance : ouvrir `index.html` dans un navigateur, ou servir le dossier (`python3 -m http.server`).
 
 ## Animation du bandeau
-Le prompt de génération est dans `PROMPT-ANIMATION.md`. La vidéo obtenue se dépose sous `img/hero.mp4`.
+Le prompt de génération est dans `PROMPT-ANIMATION.md`. La vidéo obtenue se dépose sous `img/hero.gif`.
 
 ## Fichiers
 - `index.html` : page et coquille de l'application
