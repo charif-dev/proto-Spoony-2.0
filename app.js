@@ -49,6 +49,29 @@
     });
   }
 
+  /* ---------- Bandeaux défilants (kiosques) ---------- */
+  function initCarousels() {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    document.querySelectorAll("[data-carousel]").forEach((box) => {
+      const tr = box.querySelector(".track");
+      let paused = false;
+      const step = () => (tr.firstElementChild ? tr.firstElementChild.getBoundingClientRect().width + 16 : 300);
+      const next = () => {
+        if (tr.scrollLeft + tr.clientWidth >= tr.scrollWidth - 4) tr.scrollTo({ left: 0, behavior: "smooth" });
+        else tr.scrollBy({ left: step(), behavior: "smooth" });
+      };
+      box.querySelector(".car-prev").addEventListener("click", () => tr.scrollBy({ left: -step(), behavior: "smooth" }));
+      box.querySelector(".car-next").addEventListener("click", next);
+      box.addEventListener("mouseenter", () => (paused = true));
+      box.addEventListener("mouseleave", () => (paused = false));
+      box.addEventListener("focusin", () => (paused = true));
+      box.addEventListener("focusout", () => (paused = false));
+      tr.addEventListener("touchstart", () => (paused = true), { passive: true });
+      tr.addEventListener("touchend", () => (paused = false));
+      if (!reduce) setInterval(() => { if (!paused && !document.hidden) next(); }, 4500);
+    });
+  }
+
   /* ---------- État de l'application ---------- */
   const N = 140;
   let S = null, timer = null;
@@ -295,6 +318,7 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     renderKiosks();
+    initCarousels();
     $("#close").addEventListener("click", closeApp);
     document.addEventListener("keydown", (e) => e.key === "Escape" && S && closeApp());
     $$(".tabs button").forEach((b, i) => b.addEventListener("click", () => {
