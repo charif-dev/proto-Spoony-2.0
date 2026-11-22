@@ -1,11 +1,20 @@
-/* Spoony 2.0 - démonstration interne. Moteur de l'application fictive. */
+/* Spoony 2.0 - démonstration interne. Moteur de l'application fictive, bilingue FR / EN. */
 (function () {
   "use strict";
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-  const fmt = (n, d = 0) => n.toLocaleString("fr-FR", { minimumFractionDigits: d, maximumFractionDigits: d });
+  const fmt = (n, d = 0) => n.toLocaleString(locale(), { minimumFractionDigits: d, maximumFractionDigits: d });
   const now = () => new Date();
-  const hms = (d = now()) => d.toLocaleTimeString("fr-FR") + "," + String(d.getMilliseconds()).padStart(3, "0");
+  const hms = (d = now(), l = getLang()) => d.toLocaleTimeString(l === "en" ? "en-GB" : "fr-FR") + (l === "en" ? "." : ",") + String(d.getMilliseconds()).padStart(3, "0");
+
+  /* ---------- Textes des scénarios selon la langue ---------- */
+  const EN = (sc) => (window.SC_EN && window.SC_EN[sc.id]) || null;
+  const sx = (sc, k, l = getLang()) => (l === "en" && EN(sc) && EN(sc)[k] != null ? EN(sc)[k] : sc[k]);
+  const dn = (sc, i, l = getLang()) => (l === "en" && EN(sc) ? EN(sc).departs[i] : sc.departs[i].n);
+  const al = (sc, j, l = getLang()) => (l === "en" && EN(sc) ? EN(sc).alerts[j] : sc.alerts[j]);
+  const ipeL = (sc, l = getLang()) => (l === "en" && EN(sc) ? EN(sc).ipe.label : sc.ipe.label);
+  const ipeU = (sc, l = getLang()) => (l === "en" && EN(sc) ? EN(sc).ipe.unit : sc.ipe.unit);
+  const bi = (k, v) => ({ fr: T("fr", k, v), en: T("en", k, v) });
 
   /* ---------- Icônes ---------- */
   const ICONS = {
@@ -30,19 +39,21 @@
   /* ---------- Rendu des kiosques ---------- */
   function renderKiosks() {
     const t = $("#k-themes"), s = $("#k-secteurs");
+    t.innerHTML = ""; s.innerHTML = "";
     SCENARIOS.forEach((sc) => {
       const c = document.createElement("article");
       c.className = "fiche";
       const isT = sc.kiosk === "theme";
+      const title = sx(sc, "title");
       const second = isT
-        ? `<a class="lk ghost" href="img/rollup-industrie-tertiaire.jpg" target="_blank" rel="noopener">Kakémono</a>`
-        : `<a class="lk ghost" href="${sc.pdf}" target="_blank" rel="noopener">Plaquette PDF</a>`;
-      c.innerHTML = `<div class="f-head"><img class="f-logo" src="img/logo-dotvision.png" alt="DotVision"><div class="f-ref"><b>${isT ? "THÈME" : "FICHE SECTEUR " + sc.num}</b><span>Spoony 2.0 par DotVision</span></div></div>
-        <div class="f-band">${isT ? sc.vector : "Sous-comptage et pilotage énergétique"}</div>
-        <h3>${sc.title}</h3><p class="f-tag">${sc.tagline}</p>
-        <div class="f-img"><img src="${sc.img}" alt="${sc.title}"><span class="f-play">▶</span></div>
-        ${sc.fact ? `<p class="f-fact">${sc.fact}</p>` : `<p class="f-fact">Point d'entrée : ${sc.entry}</p>`}
-        <div class="f-links"><button class="lk gold">Voir l'animation</button>${second}</div>`;
+        ? `<a class="lk ghost" href="img/rollup-industrie-tertiaire.jpg" target="_blank" rel="noopener">${T(getLang(), "kak")}</a>`
+        : `<a class="lk ghost" href="${sc.pdf}" target="_blank" rel="noopener">${T(getLang(), "pdf")}</a>`;
+      c.innerHTML = `<div class="f-head"><img class="f-logo" src="img/logo-dotvision.png" alt="DotVision"><div class="f-ref"><b>${isT ? T(getLang(), "theme") : T(getLang(), "fiche") + " " + sc.num}</b><span>${T(getLang(), "by")}</span></div></div>
+        <div class="f-band">${isT ? sx(sc, "vector") : T(getLang(), "band")}</div>
+        <h3>${title}</h3><p class="f-tag">${sx(sc, "tagline")}</p>
+        <div class="f-img"><img src="${sc.img}" alt="${title}"><span class="f-play">▶</span></div>
+        ${sc.fact ? `<p class="f-fact">${sx(sc, "fact")}</p>` : `<p class="f-fact">${T(getLang(), "entry")} ${sx(sc, "entry")}</p>`}
+        <div class="f-links"><button class="lk gold">${T(getLang(), "play")}</button>${second}</div>`;
       $(".lk.gold", c).addEventListener("click", () => openApp(sc.id));
       $(".f-img", c).addEventListener("click", () => openApp(sc.id));
       (isT ? t : s).appendChild(c);
@@ -85,6 +96,12 @@
     return Math.max(0.02, w + wave + burst + (Math.random() - 0.5) * 0.05);
   }
 
+  function setHeader() {
+    if (!S) return;
+    $("#app-site").textContent = sx(S.sc, "site");
+    $("#app-place").textContent = sx(S.sc, "place") + " · " + sx(S.sc, "title");
+  }
+
   function openApp(id) {
     const sc = SCENARIOS.find((x) => x.id === id);
     S = {
@@ -93,22 +110,24 @@
       drift: sc.departs.map(() => 1), driftTarget: sc.departs.map(() => 1),
       idle: sc.departs.map(() => 0), cut: 0,
       energy: sc.departs.reduce((a, d) => a + d.kw, 0) * 6.2,
-      micro: 2, idles: 1, alerts: 0,
+      micro: 2, idles: 1, alerts: 0, feed: [],
       events: [
-        { t: "06:12:41,208", d: "120 ms", n: sc.departs.length, lvl: "warn", c: "Creux de tension réseau amont" },
-        { t: "03:47:09,551", d: "60 ms", n: 2, lvl: "ok", c: "Micro-coupure sans arrêt machine" }
+        { t: "06:12:41,208", d: "120 ms", n: sc.departs.length, lvl: "warn", c: "ev1" },
+        { t: "03:47:09,551", d: "60 ms", n: 2, lvl: "ok", c: "ev2" }
       ]
     };
     for (let k = 0; k < N; k++) step(true);
-    $("#app-site").textContent = sc.site;
-    $("#app-place").textContent = sc.place + " · " + sc.title;
+    setHeader();
     $("#feed").innerHTML = "";
     $$(".tabs button").forEach((b, i) => b.classList.toggle("on", i === 0));
     $$(".pane").forEach((p, i) => p.classList.toggle("on", i === 0));
     renderTree(); renderIso(); renderHarm(); renderEvents(); calc();
     $("#app").classList.add("open");
     document.body.style.overflow = "hidden";
-    sc.alerts.forEach((a, i) => setTimeout(() => S && S.sc === sc && pushAlert(a.lvl, sc.departs[a.d].n, a.txt, a.reco), 900 + i * 2200));
+    sc.alerts.forEach((a, i) => setTimeout(() => {
+      if (!(S && S.sc === sc)) return;
+      addAlert(a.lvl, { fr: dn(sc, a.d, "fr"), en: dn(sc, a.d, "en") }, { fr: al(sc, i, "fr").txt, en: al(sc, i, "en").txt }, { fr: al(sc, i, "fr").reco, en: al(sc, i, "en").reco });
+    }, 900 + i * 2200));
     clearInterval(timer);
     timer = setInterval(() => { step(false); paint(); }, 650);
     paint();
@@ -131,8 +150,8 @@
       if (!silent && S.driftTarget[i] > 1 && !d._driftAlerted && S.drift[i] > 1.08) {
         d._driftAlerted = true;
         const pct = Math.round((S.driftTarget[i] - 1) * 100);
-        pushAlert("crit", d.n, `Dérive de +${pct} % sur ${d.n} par rapport à la référence des 7 derniers jours, à production égale.`,
-          "Contrôle mécanique au prochain arrêt planifié. L'automate garde la commande de l'équipement.");
+        const f = dn(S.sc, i, "fr"), e = dn(S.sc, i, "en");
+        addAlert("crit", { fr: f, en: e }, { fr: T("fr", "drift_txt", { pct, n: f }), en: T("en", "drift_txt", { pct, n: e }) }, bi("drift_reco"));
         S.alerts++;
       }
     });
@@ -143,15 +162,16 @@
   /* ---------- Arbre des départs ---------- */
   function renderTree() {
     const t = $("#tree");
-    t.innerHTML = `<div class="cab">TGBT · Armoire A1 · ${S.sc.departs.length} départs mesurés</div>` +
-      S.sc.departs.map((d, i) => `<div class="dep${i === S.sel ? " on" : ""}" data-i="${i}"><span class="st" id="st${i}"></span><span class="nm">${d.n}</span><span class="pw" id="pw${i}">-</span></div>`).join("") +
-      `<div class="principle">+ 4 compteurs existants remontés par passerelle Modbus, sans remplacement.</div>`;
+    t.innerHTML = `<div class="cab">${t_("tree", { n: S.sc.departs.length })}</div>` +
+      S.sc.departs.map((d, i) => `<div class="dep${i === S.sel ? " on" : ""}" data-i="${i}"><span class="st" id="st${i}"></span><span class="nm">${dn(S.sc, i)}</span><span class="pw" id="pw${i}">-</span></div>`).join("") +
+      `<div class="principle">${t_("treefoot")}</div>`;
     $$(".dep", t).forEach((el) => el.addEventListener("click", () => {
       S.sel = +el.dataset.i;
       $$(".dep", t).forEach((x) => x.classList.toggle("on", x === el));
       renderHarm(); paint();
     }));
   }
+  const t_ = (k, v) => T(getLang(), k, v);
 
   /* ---------- Rendu temps réel ---------- */
   function paint() {
@@ -159,7 +179,7 @@
     const sc = S.sc, last = S.series.map((a) => a[a.length - 1]);
     const total = last.reduce((a, b) => a + b, 0);
     last.forEach((p, i) => {
-      const d = sc.departs[i], el = $("#pw" + i), st = $("#st" + i);
+      const el = $("#pw" + i), st = $("#st" + i);
       if (!el) return;
       el.textContent = p >= 1000 ? fmt(p / 1000, 2) + " MW" : fmt(p, p < 10 ? 1 : 0) + " kW";
       st.className = "st" + (S.drift[i] > 1.06 ? " crit" : S.idle[i] > 0 ? " idle" : sc.alerts.some((a) => a.d === i && a.lvl !== "info") ? " warn" : "");
@@ -168,14 +188,14 @@
     $("#k-energy").innerHTML = (S.energy >= 10000 ? fmt(S.energy / 1000, 1) + "<em>MWh</em>" : fmt(S.energy) + "<em>kWh</em>");
     const avgDrift = S.drift.reduce((a, b) => a + b, 0) / S.drift.length;
     const ipe = sc.ipe.base * avgDrift;
-    $("#k-ipe").innerHTML = fmt(ipe, ipe < 1 ? 3 : ipe < 20 ? 2 : 0) + "<em>" + sc.ipe.unit + "</em>";
-    $("#k-ipe-l").textContent = sc.ipe.label;
+    $("#k-ipe").innerHTML = fmt(ipe, ipe < 1 ? 3 : ipe < 20 ? 2 : 0) + "<em>" + ipeU(sc) + "</em>";
+    $("#k-ipe-l").textContent = ipeL(sc);
     const dIpe = (avgDrift - 1) * 100;
     $("#k-ipe-d").className = "delta " + (dIpe > 0.5 ? "up" : "down");
-    $("#k-ipe-d").textContent = (dIpe > 0.5 ? "+" + fmt(dIpe, 1) + " % vs référence" : "dans la référence");
+    $("#k-ipe-d").textContent = dIpe > 0.5 ? t_("vsref", { x: fmt(dIpe, 1) }) : t_("inref");
     $("#k-micro").textContent = S.micro;
     $("#k-idle").textContent = S.idles;
-    $("#k-alerts").textContent = $$("#feed .item").length;
+    $("#k-alerts").textContent = S.feed.length;
     drawChart();
     const p = last[S.sel], d = sc.departs[S.sel];
     const U = d.kw >= 500 ? 6000 : 400, I = (p * 1000) / (Math.sqrt(3) * U * 0.88);
@@ -183,7 +203,7 @@
     $("#ph1").textContent = fmt(I * (1 + imb), 0) + " A";
     $("#ph2").textContent = fmt(I * (1 - imb / 2), 0) + " A";
     $("#ph3").textContent = fmt(I * (1 - imb / 2), 0) + " A";
-    $("#selname").textContent = d.n;
+    $("#selname").textContent = dn(sc, S.sel);
   }
 
   function drawChart() {
@@ -214,21 +234,31 @@
     arr.forEach((v, i) => { if (v === 0) { g.fillStyle = "#FF5D5D"; g.fillRect(x(i) - 1.5, 10, 3, H - 32); } });
     const lv = arr[arr.length - 1];
     g.beginPath(); g.arc(x(arr.length - 1), y(lv), 4, 0, 7); g.fillStyle = "#F2B632"; g.fill();
-    g.fillStyle = "#56708F"; g.fillText("- 90 s", pad, H - 6); g.fillText("maintenant", W - 70, H - 6);
+    g.fillStyle = "#56708F"; g.fillText("- 90 s", pad, H - 6); g.fillText(t_("now"), W - 70, H - 6);
   }
 
-  /* ---------- Alertes de l'agent ---------- */
-  function pushAlert(lvl, dep, txt, reco) {
-    const f = $("#feed"), it = document.createElement("div");
-    it.className = "item " + lvl;
-    const lab = { crit: "Priorité haute", warn: "À traiter", info: "Optimisation" }[lvl];
-    it.innerHTML = `<div class="t"><span>${hms().slice(0, 8)} · ${dep}</span><span>${lab}</span></div><p>${txt}</p>
-      <div class="reco"><b>Recommandation :</b> ${reco}</div>
-      <div class="act"><button class="ok">Valider</button><button>Plus tard</button></div>`;
-    $$(".act button", it).forEach((b, k) => b.addEventListener("click", () => {
-      $(".act", it).outerHTML = k === 0 ? `<div class="done">Validé par l'opérateur · ordre de travail créé dans la GMAO</div>` : `<div class="done" style="color:#8FA6C8">Reporté au prochain point d'équipe</div>`;
+  /* ---------- Alertes de l'agent : chaque alerte garde ses deux langues ---------- */
+  function addAlert(lvl, dep, txt, reco) {
+    if (!S) return;
+    S.feed.unshift({ lvl, dep, txt, reco, time: hms().slice(0, 8), st: 0, fresh: true });
+    renderFeed();
+  }
+  function renderFeed() {
+    const f = $("#feed"), l = getLang();
+    f.innerHTML = S.feed.map((r, idx) => {
+      const act = r.st === 0
+        ? `<div class="act"><button class="ok" data-a="1">${t_("ok")}</button><button data-a="2">${t_("later")}</button></div>`
+        : r.st === 1 ? `<div class="done">${t_("done_ok")}</div>` : `<div class="done" style="color:#8FA6C8">${t_("done_later")}</div>`;
+      const html = `<div class="item ${r.lvl}" data-i="${idx}"${r.fresh ? "" : ' style="animation:none"'}><div class="t"><span>${r.time} · ${r.dep[l]}</span><span>${t_("lvl_" + r.lvl)}</span></div><p>${r.txt[l]}</p>
+        <div class="reco"><b>${t_("reco")}</b> ${r.reco[l]}</div>${act}</div>`;
+      r.fresh = false;
+      return html;
+    }).join("");
+    $$(".act button", f).forEach((b) => b.addEventListener("click", () => {
+      S.feed[+b.closest(".item").dataset.i].st = +b.dataset.a;
+      renderFeed();
     }));
-    f.prepend(it);
+    $("#k-alerts").textContent = S.feed.length;
   }
 
   /* ---------- Simulations ---------- */
@@ -236,35 +266,33 @@
     drift() {
       const i = S.sel; S.sc.departs[i]._driftAlerted = false;
       S.driftTarget[i] = 1.14 + Math.random() * 0.08;
-      toast("Dérive injectée sur " + S.sc.departs[i].n + ". Spoony la repère en quelques secondes.");
+      toast(t_("drift_toast", { n: dn(S.sc, i) }));
     },
     cut() {
       S.cut = 1; S.micro++;
-      const ms = 80 + Math.round(Math.random() * 160), t = hms();
-      S.events.unshift({ t, d: ms + " ms", n: S.sc.departs.length, lvl: "crit", c: "Micro-coupure, redémarrage de la ligne requis" });
+      const ms = 80 + Math.round(Math.random() * 160), d0 = now(), k = S.sc.departs.length;
+      S.events.unshift({ t: hms(d0), d: ms + " ms", n: k, lvl: "crit", c: "cut_ev" });
       renderEvents();
-      pushAlert("crit", "Tous départs", `Micro-coupure de ${ms} ms horodatée à ${t}, ${S.sc.departs.length} départs touchés.`,
-        "Croiser avec le journal du distributeur et chiffrer l'arrêt induit dans l'onglet Coût d'arrêt.");
+      addAlert("crit", bi("all"), { fr: T("fr", "cut_txt", { ms, t: hms(d0, "fr"), k }), en: T("en", "cut_txt", { ms, t: hms(d0, "en"), k }) }, bi("cut_reco"));
     },
     idle() {
       let i = S.sc.departs.findIndex((d) => d.t === "convoyeur");
       if (i < 0) i = S.sel;
       S.idle[i] = 14; S.idles++;
-      pushAlert("info", S.sc.departs[i].n, `${S.sc.departs[i].n} tourne à vide : 18 % de sa puissance nominale, aucune charge détectée.`,
-        "Arrêt automatique après 5 minutes sans charge, à paramétrer dans l'automate.");
+      const f = dn(S.sc, i, "fr"), e = dn(S.sc, i, "en");
+      addAlert("info", { fr: f, en: e }, { fr: T("fr", "idle_txt", { n: f }), en: T("en", "idle_txt", { n: e }) }, bi("idle_reco"));
     },
     phase() {
-      const d = S.sc.departs[S.sel];
-      pushAlert("info", d.n, `Inversion des phases L2 et L3 détectée à la pose sur ${d.n}.`,
-        "Correction appliquée par le boîtier, sans retour de l'électricien sur site.");
-      toast("Erreur de câblage corrigée par le boîtier : la pose reste valide.");
+      const f = dn(S.sc, S.sel, "fr"), e = dn(S.sc, S.sel, "en");
+      addAlert("info", { fr: f, en: e }, { fr: T("fr", "phase_txt", { n: f }), en: T("en", "phase_txt", { n: e }) }, bi("phase_reco"));
+      toast(t_("phase_toast"));
     }
   };
 
   /* ---------- Onglet ISO 50001 ---------- */
   function renderIso() {
     const sc = S.sc;
-    const tot = sc.departs.map((d, i) => ({ n: d.n, e: S.series[i].reduce((a, b) => a + b, 0) }));
+    const tot = sc.departs.map((d, i) => ({ n: dn(sc, i), e: S.series[i].reduce((a, b) => a + b, 0) }));
     const sum = tot.reduce((a, b) => a + b.e, 0);
     tot.sort((a, b) => b.e - a.e);
     let cum = 0;
@@ -283,22 +311,22 @@
     g.strokeStyle = "#0A1B37"; g.beginPath(); g.arc(60, 60, 48, 0.75 * Math.PI, 2.25 * Math.PI); g.stroke();
     g.strokeStyle = "#F2B632"; g.beginPath(); g.arc(60, 60, 48, 0.75 * Math.PI, (0.75 + 1.5 * v) * Math.PI); g.stroke();
     g.fillStyle = "#fff"; g.font = "700 22px Inter,system-ui"; g.textAlign = "center"; g.fillText(Math.round(v * 100) + " %", 60, 66);
-    g.fillStyle = "#7F96B8"; g.font = "10px Inter,system-ui"; g.fillText("mesuré", 60, 82);
+    g.fillStyle = "#7F96B8"; g.font = "10px Inter,system-ui"; g.fillText(t_("measured"), 60, 82);
   }
 
   /* ---------- Onglet qualité réseau ---------- */
   function renderHarm() {
     const ranks = [3, 5, 7, 9, 11, 13], seed = S.sel + 1;
     const vals = ranks.map((r, k) => Math.max(0.4, (14 / r) * (0.7 + ((seed * (k + 3)) % 7) / 10)));
-    $("#harm").innerHTML = ranks.map((r, k) => `<div class="bar"><span class="lb">Rang ${r}</span><span class="tr"><i style="width:${vals[k] * 4.5}%"></i></span><span class="v">${fmt(vals[k], 1)} %</span></div>`).join("");
+    $("#harm").innerHTML = ranks.map((r, k) => `<div class="bar"><span class="lb">${t_("rank", { r })}</span><span class="tr"><i style="width:${vals[k] * 4.5}%"></i></span><span class="v">${fmt(vals[k], 1)} %</span></div>`).join("");
     const thd = Math.sqrt(vals.reduce((a, b) => a + b * b, 0));
     $("#thd").textContent = fmt(thd, 1) + " %";
     $("#fp").textContent = fmt(0.82 + ((seed * 7) % 13) / 100, 2);
-    $("#harm-dep").textContent = S.sc.departs[S.sel].n;
+    $("#harm-dep").textContent = dn(S.sc, S.sel);
   }
   function renderEvents() {
-    $("#events").innerHTML = `<table><tr><th>Horodatage</th><th>Durée</th><th>Départs</th><th>Statut</th></tr>` +
-      S.events.slice(0, 7).map((e) => `<tr><td class="mono">${e.t}</td><td>${e.d}</td><td>${e.n}</td><td><span class="pill ${e.lvl}">${e.c}</span></td></tr>`).join("") + `</table>`;
+    $("#events").innerHTML = `<table><tr><th>${t_("c_ts")}</th><th>${t_("c_dur")}</th><th>${t_("c_dep")}</th><th>${t_("c_st")}</th></tr>` +
+      S.events.slice(0, 7).map((e) => `<tr><td class="mono">${e.t}</td><td>${e.d}</td><td>${e.n}</td><td><span class="pill ${e.lvl}">${t_(e.c)}</span></td></tr>`).join("") + `</table>`;
   }
 
   /* ---------- Onglet coût d'arrêt ---------- */
@@ -316,9 +344,14 @@
   let tt;
   function toast(m) { const t = $("#toast"); t.textContent = m; t.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => t.classList.remove("on"), 3200); }
 
-  document.addEventListener("DOMContentLoaded", () => {
+  /* changement de langue : tout ce qui est généré par script est redessiné */
+  window.onLang = function () {
     renderKiosks();
-    initCarousels();
+    if (!S) return;
+    setHeader(); renderTree(); renderIso(); renderHarm(); renderEvents(); renderFeed(); calc(); paint();
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
     $("#close").addEventListener("click", closeApp);
     document.addEventListener("keydown", (e) => e.key === "Escape" && S && closeApp());
     $$(".tabs button").forEach((b, i) => b.addEventListener("click", () => {
@@ -329,7 +362,10 @@
     }));
     $$("[data-sim]").forEach((b) => b.addEventListener("click", () => SIM[b.dataset.sim]()));
     $$(".calc input").forEach((i) => i.addEventListener("input", calc));
-    $("#iso-export").addEventListener("click", () => toast("Rapport des usages énergétiques significatifs généré (simulation)."));
+    $("#iso-export").addEventListener("click", () => toast(t_("iso_toast")));
+    $("#quote").addEventListener("submit", (e) => { e.preventDefault(); toast(t_("quote_toast")); });
     window.addEventListener("resize", () => S && paint());
+    initLang();
+    initCarousels();
   });
 })();

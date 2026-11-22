@@ -23,3 +23,10 @@ Le prompt de génération est dans `PROMPT-ANIMATION.md`. La vidéo obtenue se d
 - `app.js` : moteur de simulation et rendu
 - `img/` : visuels Spoony 2.0, logo DotVision, photos des fiches
 - `plaquettes/` : les neuf fiches sectorielles, mention et logo du distributeur retirés
+
+
+## V4 : langues et sections reprises du site
+
+- Sélecteur FR / EN dans la navigation et dans l'application. `?lang=en` force l'anglais. Le français est le texte de la page, `i18n.js` porte les équivalents anglais et `data-en.js` ceux des 15 scénarios.
+- Sections ajoutées, inspirées de dotvision.com hors éducation et sport : Domaines, capacités annoncées de la 2.0, Gamme (Blue Leaf, Blue Panda, Blue Forest, produits), Services (IoT Lab, Europrod), Projets collaboratifs, Presse, Contact avec formulaire inerte.
+- Chaque bloc issu du site porte sa source et sa date de consultation (22-11-2026). Les plaquettes PDF restent en français.

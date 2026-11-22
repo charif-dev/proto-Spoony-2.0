@@ -13,7 +13,8 @@
 
 <nav class="nav"><div class="wrap">
   <a class="brand" href="#top"><img src="img/logo-dotvision.png" alt="DotVision"><span class="sep">|</span><span class="prod">Spoony 2.0</span></a>
-  <ul><li><a href="#messages">Messages</a></li><li><a href="#themes">Thèmes</a></li><li><a href="#secteurs">9 secteurs</a></li><li><a href="#archi">Architecture</a></li></ul>
+  <ul><li><a href="#messages">Messages</a></li><li><a href="#themes">Thèmes</a></li><li><a href="#secteurs">9 secteurs</a></li><li><a href="#domaines">Domaines</a></li><li><a href="#archi">Architecture</a></li><li><a href="#gamme">Gamme</a></li><li><a href="#projets">Projets</a></li><li><a href="#contact">Contact</a></li></ul>
+  <div class="lang" role="group" aria-label="Langue"><button data-lang="fr" class="on">FR</button><button data-lang="en">EN</button></div>
 </div></nav>
 
 <header class="hero" id="top"><div class="wrap">
@@ -94,6 +95,33 @@
   </div>
 </div></section>
 
+<section class="kiosk" id="domaines"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Domaines · repris du site dotvision.com</span>
+    <h2>Quatre domaines, une même chaîne de mesure.</h2>
+    <p>Le site présente DotVision par domaine d'application. La démonstration reprend les trois domaines où Spoony mesure, et signale celui où la gamme répond par d'autres produits.</p>
+  </div>
+  <div class="dom-grid">
+    <article class="dom"><span class="dom-k">Industrie 5.0</span>
+      <h3>Rendre chaque équipement communicant</h3>
+      <p>Un sous-compteur posé en quelques dizaines de minutes, des données à la seconde pour suivre les moyens de production, et des protocoles standards pour s'intégrer à l'existant.</p>
+      <div class="dom-p">Spoony · Aloha</div><a class="dom-l" href="#secteurs">Voir les 9 secteurs</a></article>
+    <article class="dom"><span class="dom-k">Bâtiment intelligent</span>
+      <h3>Mesurer l'énergie par usage</h3>
+      <p>L'efficacité énergétique des bâtiments, des villes et des transports passe par de nouveaux moyens de suivi, de pilotage et d'optimisation, jusqu'aux réseaux d'énergie intelligents.</p>
+      <div class="dom-p">Spoony</div><a class="dom-l" href="#themes">Voir les thèmes</a></article>
+    <article class="dom"><span class="dom-k">Transport et mobilité</span>
+      <h3>Du matériel roulant à la borne de recharge</h3>
+      <p>Énergie des trains et des infrastructures, température et humidité en wagon, détection d'arcs sur ligne aérienne, géolocalisation du matériel, supervision de la recharge électrique.</p>
+      <div class="dom-p">Spoony · Aloha · Holi</div><a class="dom-l" href="#themes">Voir les thèmes</a></article>
+    <article class="dom out"><span class="dom-k">Sécurité et défense</span>
+      <h3>Surveillance et protection sur mesure</h3>
+      <p>Solutions dédiées aux forces de l'ordre et d'intervention, et à la sécurisation de grands sites sensibles. Ce domaine ne repose pas sur Spoony.</p>
+      <div class="dom-p">Pumba · Blue Forest · Blue Panda · Blue Leaf</div><span class="dom-l off">Hors périmètre de la démo</span></article>
+  </div>
+  <p class="srcline">Source : rubrique Solutions de dotvision.com, consultée le 22-11-2026.</p>
+</div></section>
+
 <section class="archi" id="archi"><div class="wrap">
   <div class="sec-head">
     <span class="eyebrow">Architecture</span>
@@ -111,6 +139,114 @@
     <div>Cohabitation avec la 1.5<small>La 2.0 lit les mesures déjà en place, sans dépose.</small></div>
     <div>Le coût posé décide<small>Le seuil de délégation d'achat se franchit sur l'installation.</small></div>
   </div>
+  <div class="specs">
+    <h3>Capacités annoncées sur le site pour Spoony 2.0</h3>
+    <div class="chips">
+      <span>Plus puissant</span><span>IA embarquée</span><span>Analyse harmonique</span><span>Jusqu'à 10 mesures triphasées</span><span>Entrées impulsionnelles</span><span>Extensible</span>
+    </div>
+    <div class="chips proto"><span>MQTT</span><span>Modbus</span><span>API REST HTTP</span><span>FTP</span></div>
+    <p class="srcline">Source : page Spoony 2.0 de dotvision.com, consultée le 22-11-2026. Le site qualifie son image de non contractuelle.</p>
+  </div>
+</div></section>
+
+<section class="gamme" id="gamme"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Gamme · du capteur au cloud</span>
+    <h2>Le boîtier, le système, la plateforme.</h2>
+    <p>Spoony s'appuie sur trois briques logicielles de DotVision, de l'intelligence embarquée à la plateforme de gestion de parc.</p>
+  </div>
+  <div class="stack">
+    <div class="layer l1"><span class="k">EDGE</span><h4>Blue Leaf · IA embarquée</h4><p>Décentraliser l'intelligence vers les objets pour ne remonter que la donnée utile.</p></div>
+    <div class="layer l2"><span class="k">OBJET</span><h4>Blue Panda · système temps réel</h4><p>Système d'exploitation temps réel pour objets connectés, programmable en JavaScript, C ou C++.</p></div>
+    <div class="layer l3"><span class="k">CLOUD</span><h4>Blue Forest · plateforme</h4><p>Gestion de parc et dialogue bidirectionnel avec le cloud, en nuage ou sur site : courtier MQTT et HTTPS, séries temporelles, alarmes.</p></div>
+  </div>
+  <div class="prod-grid">
+    <article class="pcard"><span class="pk">Sous-comptage énergétique</span><h3>Spoony 1.5</h3>
+      <p>Mono ou triphasé, pinces ouvrantes, passerelle Modbus, format rail DIN 3/2.</p></article>
+    <article class="pcard hl"><img src="img/spoony-2.jpg" alt="Boîtier Spoony 2.0 et ses modules"><span class="pk">Sous-comptage modulaire</span><h3>Spoony 2.0</h3>
+      <p>Boîtier modulaire : base, mesure, LTE, UPS. Objet de cette démonstration.</p></article>
+    <article class="pcard"><span class="pk">Passerelle multi-signaux</span><h3>Aloha</h3>
+      <p>Acquisition de signaux variés, commande par IA ou à distance. 110 x 91 x 45 mm, pensée pour le matériel roulant.</p></article>
+    <article class="pcard"><span class="pk">Détection d'arcs électriques</span><h3>Holi</h3>
+      <p>Passerelle pour matériel roulant et installations électriques. 156 x 122 x 91 mm.</p></article>
+    <article class="pcard"><span class="pk">Nez intelligent</span><h3>Pumba</h3>
+      <p>Détecteur portable de composés organiques volatils, destiné aux forces de l'ordre.</p></article>
+  </div>
+  <p class="srcline">Sources : pages produits de dotvision.com, consultées le 22-11-2026. Les dimensions sont celles publiées par le site.</p>
+</div></section>
+
+<section class="svc" id="services"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Services</span>
+    <h2>De la preuve de concept à l'industrialisation.</h2>
+    <p>Deux offres complètent le produit : un laboratoire pour concevoir, une usine pour assembler.</p>
+  </div>
+  <div class="svc-grid">
+    <article><span class="pk">IoT Lab</span><h3>Accompagnement sur mesure</h3>
+      <p>Une équipe qui réunit matériel et logiciel conçoit des objets connectés, de la preuve de concept au produit industriel, sur des briques ouvertes et des protocoles standards.</p></article>
+    <article><span class="pk">Europrod</span><h3>Usine IoT dans l'Aube</h3>
+      <p>DotVision détient une participation dans Europrod Technologies, usine d'assemblage de petites et moyennes séries. Le site annonce une production relocalisée en France depuis 2022.</p></article>
+  </div>
+  <p class="srcline">Sources : pages IoT Lab, Europrod et Industrie 5.0 de dotvision.com, consultées le 22-11-2026. Statut de filiale ou de participation et périmètre de fabrication : à confirmer.</p>
+</div></section>
+
+<section class="proj" id="projets"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Projets collaboratifs</span>
+    <h2>Des programmes de recherche avec des industriels et des laboratoires.</h2>
+    <p>Le site recense dix projets. La démonstration en retient huit : énergie, ferroviaire et cybersécurité.</p>
+  </div>
+  <div class="proj-grid">
+    <article><span class="pk">Ferroviaire</span><h3>In2Rail</h3><p>Bases d'un réseau ferroviaire européen résilient et à forte capacité, avec énergie, maintenance et information intégrées.</p></article>
+    <article><span class="pk">Ferroviaire · énergie</span><h3>In2Dreams</h3><p>Solutions numériques pour suivre et exploiter les données d'énergie et d'actifs de tout le système ferroviaire.</p></article>
+    <article><span class="pk">Bâtiment · mobilité</span><h3>Grid Power</h3><p>Démonstrateurs de gestion énergétique de bâtiments et de mobilité électrique, organisés en micro-réseau à l'échelle d'un écoquartier.</p></article>
+    <article><span class="pk">Énergie</span><h3>Epit 2.0</h3><p>Système d'information ouvert pour piloter les services d'énergie et le bilan carbone d'un écoquartier.</p></article>
+    <article><span class="pk">Énergie urbaine</span><h3>DataPoC</h3><p>Lauréat du défi 1, villes et systèmes urbains, des défis numériques des Investissements d'avenir : outil d'aide à la décision sur le potentiel de flexibilité.</p></article>
+    <article><span class="pk">Ville durable</span><h3>SensCity</h3><p>Capteurs et services pour la ville durable, dans le cadre d'un pôle de compétitivité.</p></article>
+    <article><span class="pk">Cybersécurité</span><h3>CTIS4NIS</h3><p>Outils pour suivre, traiter et partager l'information de cybersécurité sur les infrastructures de télécommunications.</p></article>
+    <article><span class="pk">Cybersécurité</span><h3>5G-TACTIC</h3><p>Vers des réseaux 5G sûrs et fiables.</p></article>
+  </div>
+  <p class="srcline">Source : page Projets de dotvision.com, consultée le 22-11-2026. Le site déclare l'appartenance au pôle Systematic, à la French Tech et à la French Fab : à confirmer.</p>
+</div></section>
+
+<section class="press" id="presse"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Dans la presse</span>
+    <h2>Ce que la presse a publié sur DotVision.</h2>
+  </div>
+  <ul class="press-list">
+    <li><span class="mono">15-12-2023</span><b>Le Nouvel Économiste</b><span>Entretien avec Guillaume Pelletier</span></li>
+    <li><span class="mono">15-12-2023</span><b>France 3</b><span>Des capteurs intelligents à Bar-sur-Aube</span></li>
+    <li><span class="mono">10-11-2023</span><b>Le Journal du Parlement</b><span>Innovation technologique : renforcer la sécurité du territoire national</span></li>
+    <li><span class="mono">26-05-2023</span><b>Ministère de l'Industrie</b><span>Discours du ministre de l'Industrie</span></li>
+    <li><span class="mono">04-11-2014</span><b>boursier.com</b><span>Alstom conclut un partenariat avec DotVision</span></li>
+  </ul>
+  <p class="srcline">Source : page Presse de dotvision.com, consultée le 22-11-2026. <a href="https://dotvision.com/en/press/" target="_blank" rel="noopener">Voir la page Presse</a></p>
+</div></section>
+
+<section class="contact" id="contact"><div class="wrap">
+  <div class="sec-head">
+    <span class="eyebrow">Contact</span>
+    <h2>Demander un devis.</h2>
+    <p>Même parcours que sur le site. Dans cette démonstration, rien n'est envoyé.</p>
+  </div>
+  <div class="contact-grid">
+    <form id="quote" autocomplete="off">
+      <div class="two"><label>Nom<input name="n" type="text"></label><label>Prénom<input name="p" type="text"></label></div>
+      <div class="two"><label>E-mail<input name="e" type="text"></label><label>Mobile<input name="m" type="text"></label></div>
+      <label>Société, facultatif<input name="s" type="text"></label>
+      <label>Votre demande<textarea name="r" rows="4"></textarea></label>
+      <button class="btn gold" type="submit">Demander un devis</button>
+    </form>
+    <aside>
+      <h4>Sites</h4>
+      <p><b>DotVision SAS</b>Moissy-Cramayel<span class="mono">+33 (0)1 84 31 31 61</span></p>
+      <p><b>DotVision SAS</b>Saint-Pierre-du-Perray<span class="mono">+33 (0)1 59 13 07 66</span></p>
+      <p><b>DotVision, Inc.</b>Newark, Delaware, États-Unis</p>
+      <p><b>Presse</b><span class="mono">press@dotvision.com</span></p>
+      <p class="srcline">Source : pages Contact et Presse de dotvision.com, consultées le 22-11-2026.</p>
+    </aside>
+  </div>
 </div></section>
 
 <footer><div class="wrap"><span>DotVision · Spoony 2.0 · Démonstration interne, novembre 2026</span><span>Toutes les données de site sont fictives.</span></div></footer>
@@ -121,6 +257,7 @@
     <span class="brand"><img src="img/logo-dotvision.png" alt="DotVision"><span>Spoony 2.0</span></span>
     <div class="site"><b id="app-site">Site</b><span id="app-place"></span></div>
     <span class="live"><i></i>EN DIRECT</span>
+    <div class="lang inapp" role="group" aria-label="Langue"><button data-lang="fr" class="on">FR</button><button data-lang="en">EN</button></div>
     <span class="fict">Données fictives</span>
     <button class="close" id="close" aria-label="Fermer">×</button>
   </div>
@@ -239,7 +376,9 @@
 </div>
 <div class="toast" id="toast"></div>
 
+<script src="i18n.js"></script>
 <script src="data.js"></script>
+<script src="data-en.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
